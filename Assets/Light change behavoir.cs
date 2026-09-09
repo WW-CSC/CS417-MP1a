@@ -8,7 +8,7 @@ public class Lightchangebehavoir : MonoBehaviour
     public InputActionReference buttonPressed;
     private float currentcolor = 0.0f;
     private float cycleSpeed = 0.2f;
-    private bool onOff = true;
+    private bool onOff = false;
 
     void Start()
     {
