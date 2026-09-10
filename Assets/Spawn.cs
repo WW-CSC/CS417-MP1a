@@ -5,7 +5,7 @@ public class Spawn : MonoBehaviour
 {
     public GameObject jarvis, probe;
     public GameObject menu;
-    public InputActionReference action;
+    public InputActionReference action1, action2;
     public ParticleSystem spawnParticles;
     public AudioSource spawnAudio;
     public bool currentview = false;
@@ -16,8 +16,10 @@ public class Spawn : MonoBehaviour
         menu.SetActive(false);
         jarvis.SetActive(false);
         probe.SetActive(false);
-        action.action.Enable();
-        action.action.performed += (ctx) => ChangeViewJarvis();
+        action1.action.Enable();
+        action1.action.performed += (ctx) => ChangeViewJarvis();
+	action2.action.Enable();
+        action2.action.performed += (ctx) => LoadMenu();
     }
 
     // Update is called once per frame
@@ -44,5 +46,9 @@ public class Spawn : MonoBehaviour
             probe.SetActive(false);
             currentview = false;
         }
+    }
+    public void LoadMenu()
+    {
+	menu.SetActive(!menu.activeSelf);
     }
 }

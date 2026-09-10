@@ -26,7 +26,7 @@ public class Lightchangebehavoir : MonoBehaviour
         }
         else
         {
-            currentcolor = 0.0f;
+            roomLight.color = Color.white;
         }
     }
      
