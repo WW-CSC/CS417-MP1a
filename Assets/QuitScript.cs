@@ -1,27 +1,30 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class Quit : MonoBehaviour
+public class Quit : MonoBehaviour, IPointerClickHandler
 {
 
-    public InputActionReference action;
+    public InputActionReference input;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        action.action.Enable();
-        action.action.performed += (ctx) =>
+        input.action.Enable();
+        input.action.performed += (ctx) =>
         {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+            QuitGame();
         };
     }
-
-    // Update is called once per frame
-    void Update()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        
+        QuitGame();
+    }
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

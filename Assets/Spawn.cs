@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class Spawn : MonoBehaviour
 {
     public GameObject jarvis, probe;
+    public GameObject menu;
     public InputActionReference action;
     public ParticleSystem spawnParticles;
     public AudioSource spawnAudio;
@@ -12,6 +13,7 @@ public class Spawn : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        menu.SetActive(false);
         jarvis.SetActive(false);
         probe.SetActive(false);
         action.action.Enable();

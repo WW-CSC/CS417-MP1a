@@ -1,16 +1,17 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ChangeView : MonoBehaviour
+public class ChangeView : MonoBehaviour, IPointerClickHandler
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject menu;
+    
+    public void OnPointerClick(PointerEventData eventData)
     {
-        
+        GoBack();
+    }
+    public void GoBack()
+    {
+        menu.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
