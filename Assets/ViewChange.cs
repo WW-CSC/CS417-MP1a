@@ -1,38 +1,46 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.XR.CoreUtils;
 
-public class CameraSwapToggle : MonoBehaviour
+public class TeleportPlayer : MonoBehaviour
 {
-    public XROrigin xrOrigin;
-    public Camera externalCamera;
-    public InputActionReference trigger;
+    public Transform playerOrigin;
+    public Transform insideLocation;
+    public Transform outsideLocation;
+  
 
-    private Camera mainXRCamera;
-    private bool isExternalActive = false;
+    public InputActionProperty toggleButtonAction;
 
-    private void Start()
-    {
-        mainXRCamera = xrOrigin.Camera;
-        mainXRCamera.enabled = true;
-        externalCamera.enabled = false;
-    }
+    private bool isOutside = false;
 
     private void OnEnable()
     {
-        trigger.action.Enable();
-        trigger.action.performed += OnClick;
+        toggleButtonAction.action.Enable();
+        toggleButtonAction.action.performed += OnButtonPressed;
     }
 
     private void OnDisable()
     {
-        trigger.action.performed -= OnClick;
+        toggleButtonAction.action.performed -= OnButtonPressed;
+        toggleButtonAction.action.Disable();
     }
 
-    public void OnClick(InputAction.CallbackContext context)
+    private void OnButtonPressed(InputAction.CallbackContext context)
     {
-        isExternalActive = !isExternalActive;
-        mainXRCamera.enabled = isExternalActive;
-        externalCamera.enabled = !isExternalActive;
+        ToggleLocation();
+    }
+
+    public void ToggleLocation()
+    {
+
+        if (isOutside)
+        {
+            playerOrigin.position = insideLocation.position;
+            isOutside = false;
+        }
+        else
+        {
+            playerOrigin.position = outsideLocation.position;
+            isOutside = true;
+        }
     }
 }
